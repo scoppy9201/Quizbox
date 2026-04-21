@@ -1,187 +1,261 @@
-<h1 align="center">MovieBox - Online Movie Ticket Booking System</h1>
+<p align="center">
+  <img src="screenshots/logo.png" style="max-width: 200px; height: auto;" alt="QuizBox — Online Quiz Platform">
+</p>
+
+<h1 align="center">QuizBox</h1>
 
 <p align="center">
-  Built with Laravel, Tailwind CSS, and Blade UI <br/>
-  Developed solo in 8 days as a 2nd semester term-end project at Aptech.
+  <strong>Open-source quiz and learning platform built with Laravel</strong><br>
+  Practice questions, evaluate knowledge, and track performance through a clean and structured system.
 </p>
 
 <p align="center">
-  <a href="https://github.com/himeshdua/moviebox"><img src="https://img.shields.io/github/stars/himeshdua/moviebox?style=social" alt="GitHub stars"></a>
-  <a href="https://github.com/himeshdua/moviebox"><img src="https://img.shields.io/github/forks/himeshdua/moviebox?style=social" alt="GitHub forks"></a>
+  <img src="https://img.shields.io/badge/Laravel-12.x-FF2D20?style=flat&logo=laravel" alt="Laravel">
+  <img src="https://img.shields.io/badge/PHP-8.3-777BB4?style=flat&logo=php" alt="PHP">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat" alt="License">
+  <img src="https://img.shields.io/github/stars/your-username/quizbox?style=flat" alt="Stars">
 </p>
 
 ---
 
-## 🎥 About MovieBox
+## Table of Contents
 
-**MovieBox** is a fully functional movie ticket booking system built using **Laravel 12**. It allows users to browse currently showing and top-rated movies, watch trailers, read and post reviews, and book movie tickets — all through a responsive, user-friendly interface.
-
-This project was developed as a **2nd semester term-end project at Aptech** and built entirely by one person within just **8 days**. It demonstrates full-stack capability, including admin management, role-based access control, database design, and clean UI components.
-
----
-
-## 🚀 Features
-
--   🎬 Movie Browse with posters, categories, and ratings
--   🎞 Trailer preview and short descriptions
--   ⭐ Community reviews with ratings
--   🧾 Ticket booking with multiple class pricing (**Silver, Gold, Platinum**)
--   🧒 Discounted pricing for kids (3–12 years)
--   📱 Responsive and mobile-friendly design using **Tailwind CSS**
--   🔐 User authentication (**Laravel Auth**) and protected routes
--   📊 Admin dashboard with total revenue, user, movie, and show stats
--   🎛 Admin controls for adding/updating/deleting movies and shows
--   🧾 Booking list with quantities, dates, and total pricing
+* [Overview](#overview)
+* [Features](#features)
+* [Screenshots](#screenshots)
+* [Tech Stack](#tech-stack)
+* [Getting Started](#getting-started)
+* [Configuration](#configuration)
+* [Database Schema](#database-schema)
+* [Contributing](#contributing)
+* [Security](#security)
+* [License](#license)
 
 ---
 
-## ⚙️ Tech Stack
+## Overview
 
--   **Framework**: Laravel 12 (MVC architecture)
--   **Frontend**: Blade Templating, Tailwind CSS
--   **UI Libraries**: ShadCN-inspired components, BadtzUI, PrismUI
--   **Database**: MySQL using Eloquent ORM
--   **Authentication**: Laravel built-in Auth + Middleware
--   **Deployment**: Vite + Artisan + PHP server
+**QuizBox** is a self-hosted, open-source web application designed for quiz-based learning and knowledge evaluation.
 
----
+It provides users with a structured environment to practice multiple-choice questions, track performance, and improve learning efficiency without relying on external platforms.
 
-## 📁 Folder Structure
+The system is built following modern Laravel architecture principles, ensuring maintainability, scalability, and clean code organization.
 
--   `moviebox/`
-    -   `app/`
-        -   `Http/Controllers/` → `MovieController`, `ShowController`, `BookingController`, etc.
-        -   `Models/` → `Movie`, `Show`, `Booking`, `User`, `Review`
-    -   `resources/views/` → All Blade templates
-    -   `routes/web.php` → App routes
-    -   `database/migrations/` → Table structures for movies, shows, bookings, etc.
-    -   `database/factories/` → Model factories for test data
-    -   `database/seeders/` → Seed classes for users, movies, shows, etc.
-    -   `public/posters/` → Uploaded movie posters
-    -   `.env` → Environment-specific variables
+**Who is it for?**
+
+* Students preparing for exams or assessments
+* Developers looking for a real-world Laravel project
+* Educators building custom testing systems
 
 ---
 
-## 🖼 Screenshots
+## Features
 
--   **🎬 Movie Listings Page**
-    ![Movie Listings Page](screenshots/movie-listings.png)
+### Authentication and Security
 
--   **🎬 Movie Details Page**
-    ![Movie Details Page](screenshots/movie-details.png)
+* Secure user registration and login
+* Password hashing and validation
+* Middleware-based route protection
+* Role-based access control (admin and user)
 
-    **💬 Review Submission**
-    ![Review Submission](screenshots/review-submission.png)
+### Quiz Management
 
--   **📊 Admin Dashboard**
-    ![Admin Dashboard](screenshots/admin-dashboard.png)
+* Create and manage quizzes
+* Multiple-choice question system
+* Randomized question delivery
+* Flexible quiz structure
 
-    **📆 Movies List**
-    ![Movies List](screenshots/movies-list.png)
+### Result and Evaluation
 
-    **📆 Shows List**
-    ![Shows List](screenshots/shows-list.png)
+* Automatic score calculation
+* Result storage per user
+* Performance tracking across attempts
+* Extendable analytics system
 
-    **📆 Reviews List**
-    ![Reviews List](screenshots/reviews-list.png)
+### Administration
 
-    **📆 Customers List**
-    ![Customers List](screenshots/customers-list.png)
+* Full CRUD for quizzes and questions
+* User management
+* Centralized control panel
 
-    **📆 Create Movie Show Form**
-    ![Create Movie Show Form](screenshots/create-show-form.png)
+### User Interface
 
----
-
-## 🧪 How to Run Locally
-
-Follow the steps below to set up and run MovieBox on your local machine.
-
-1.  **Clone the repository and navigate to the project directory:**
-
-    ```bash
-    git clone https://github.com/HimeshDua/MovieBox.git
-    cd MovieBox
-    ```
-
-2.  **Install dependencies:**
-
-    ```bash
-    composer install
-    npm install
-    ```
-
-3.  **Set up the `.env` file and generate the application key:**
-
-    ```bash
-    cp .env.example .env
-    php artisan key:generate
-    ```
-
-    Next, open the `.env` file and update the `DB_` variables with your MySQL database credentials.
-
-4.  **Run migrations and seed the database:**
-    This command will create the necessary database tables and populate them with sample data.
-
-    ```bash
-    php artisan migrate --seed
-    ```
-
-5.  **Start the local development server:**
-    Run these two commands in separate terminal windows to serve both the back-end and front-end assets.
-    ```bash
-    php artisan serve
-    npm run dev
-    ```
-    Visit `http://127.0.0.1:8000` in your browser to view the application.
+* Responsive layout using Tailwind CSS
+* Clean and minimal design
+* Optimized rendering with Blade templates
 
 ---
 
-## 🌟 Project Highlights
+## Screenshots
 
--   Solo-built in just **8 days**.
--   Developed as a final project for **Aptech's 2nd semester**.
--   Full **CRUD** (Create, Read, Update, Delete) functionality for movies and shows.
--   Clean database schema and **Eloquent relationships**.
--   No external UI kits—fully customized **Tailwind CSS** components.
--   Light/dark mode compatible using CSS variables.
+<p align="center">
+  <img src="screenshots/dashboard.png" width="800" alt="Dashboard overview">
+  <br><em>Dashboard showing quiz activity and summary</em>
+</p>
 
----
+<p align="center">
+  <img src="screenshots/quiz.png" width="800" alt="Quiz interface">
+  <br><em>Quiz interface for answering questions</em>
+</p>
 
-## 🧱 Tables Overview
+<p align="center">
+  <img src="screenshots/result.png" width="800" alt="Result page">
+  <br><em>Result page displaying score and feedback</em>
+</p>
 
-The database is structured with the following key tables:
-
--   `users`: Stores user information (id, name, email, password, role, created_at).
--   `movies`: Contains details about each movie (id, title, description, year, poster, trailer_url, category, language, rating, duration).
--   `shows`: Links movies to showtimes and locations (id, movie_id, city, location, show_date, show_time, price_silver, price_gold, price_platinum).
--   `bookings`: Records ticket bookings (user_id, show_id, class_type, quantity, is_kid, total_price).
--   `reviews`: Manages user reviews and ratings for movies (user_id, movie_id, comment, rating, created_at).
-
----
-
-## 🔮 Future Enhancements
-
--   **💳 Payment gateway integration** (e.g., Stripe, JazzCash)
--   **🪑 Seat selection layout**
--   **📧 Email ticket confirmations**
--   **🗺 Multi-city theatre map support**
--   **📱 PWA or mobile app companion**
+<p align="center">
+  <img src="screenshots/admin.png" width="800" alt="Admin panel">
+  <br><em>Admin panel for managing system data</em>
+</p>
 
 ---
 
-## 👨‍💻 Author
+## Tech Stack
 
-**Himesh Dua**
-
-17 y/o Full Stack Developer from Karachi, Pakistan
-
--   **Portfolio**: [himeshdua.vercel.app](https://himeshdua.vercel.app)
--   **GitHub**: [@himeshdua](https://github.com/himeshdua)
--   **Email**: himeshdua22@gmail.com
+| Layer      | Technology             |
+| ---------- | ---------------------- |
+| Framework  | Laravel 12             |
+| Language   | PHP 8.3                |
+| Database   | MySQL                  |
+| Frontend   | Blade and Tailwind CSS |
+| Build Tool | Vite                   |
 
 ---
 
-## 📝 License
+## Getting Started
 
-This project is open-sourced under the [MIT license](https://opensource.org/licenses/MIT).
+### Prerequisites
+
+* PHP version 8.2 or higher
+* Composer
+* MySQL or compatible database
+* Node.js and NPM
+
+---
+
+### Installation
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/your-username/quizbox.git
+cd quizbox
+```
+
+---
+
+**2. Install dependencies**
+
+```bash
+composer install
+npm install
+```
+
+---
+
+**3. Set up environment**
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+---
+
+**4. Configure database**
+
+Edit `.env` file:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=quiz_box
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+---
+
+**5. Run migrations and seed data**
+
+```bash
+php artisan migrate --seed
+```
+
+---
+
+**6. Start development server**
+
+```bash
+php artisan serve
+npm run dev
+```
+
+Application will be available at:
+
+```
+http://localhost:8000
+```
+
+---
+
+## Configuration
+
+The system can be extended with additional features such as:
+
+* Timed quizzes
+* Leaderboards
+* Category-based filtering
+* Exportable reports
+
+---
+
+## Database Schema
+
+| Table     | Purpose               |
+| --------- | --------------------- |
+| users     | User accounts         |
+| quizzes   | Quiz definitions      |
+| questions | Question storage      |
+| results   | User performance data |
+
+Detailed structure can be found in the migration files.
+
+---
+
+## Contributing
+
+To contribute to this project:
+
+1. Fork the repository
+2. Create a new branch
+3. Commit your changes
+4. Push to your branch
+5. Submit a pull request
+
+Ensure your code follows the existing structure and standards.
+
+---
+
+## Security
+
+If you discover any security vulnerability, do not open a public issue.
+Please report it privately via email for responsible disclosure.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+<p align="center">
+  Developed by <strong>Your Name</strong><br>
+  Fullstack Developer
+</p>
+
+<p align="center">
+  Star the repository · Report issues · Request features
+</p>
