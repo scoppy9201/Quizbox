@@ -1,4 +1,4 @@
-<x-admin-layout title="Movies List - Movie Box">
+<x-admin-layout title="Movies List - {{ config('app.name') }}">
     {{-- Breadcrumb --}}
     <nav class="text-sm text-muted-foreground mb-6" aria-label="breadcrumb">
         <ol class="list-none p-0 inline-flex">

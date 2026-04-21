@@ -22,7 +22,7 @@ class MovieController extends Controller
         return view("movies.detail", [
             'movie' => $movie,
             'isKid' => $isKid,
-            'title' => $movie->title . ' - Movie Box'
+            'title' => $movie->title . ' - ' . config('app.name')
         ]);
     }
 

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    // register
+    // Register 
     public function showRegister()
     {
         return view('auth.register');
@@ -19,64 +19,76 @@ class AuthController extends Controller
     public function register(Request $req)
     {
         $credentials = $req->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'name'          => ['required', 'string', 'max:255'],
+            'email'         => ['required', 'email', 'unique:users,email'],
+            'password'      => ['required', 'string', 'min:6', 'confirmed'],
             'date_of_birth' => ['required', 'date', 'before:today'],
-
         ]);
 
-        $dob  =  Carbon::parse($req->date_of_birth);
-        $isEligibleAge  =  $dob->age <= 3;
+        $dob = Carbon::parse($req->date_of_birth);
 
-        if ($isEligibleAge) {
-            return redirect()->with('error', 'Your age is not eligible, grow up fast kid.');
+        if ($dob->age <= 3) {
+            return redirect()->back()
+                ->with('error', 'Tuổi của bạn chưa đủ điều kiện.');
         }
 
-        $isAdmin = User::count();
-
-        if ($isAdmin === 0) {
+        // Người dùng đầu tiên là admin
+        if (User::count() === 0) {
             $credentials['role'] = 'admin';
         }
 
         $user = User::create($credentials);
         Auth::login($user);
-        $isKid = $dob->age >= 12 && $dob->age <= 3;
-        session(['isKid' => $isKid]);
-        return redirect('/')->with('success', 'User created successfully.');
+
+        session(['isKid' => ($dob->age >= 12 && $dob->age <= 3)]);
+
+        if ($user->isAdmin()) {
+            return redirect()->route('admin.dashboard')
+                ->with('success', 'Đăng ký thành công! Chào mừng Admin.');
+        }
+
+        return redirect()->route('admin.dashboard')
+            ->with('success', 'Đăng ký thành công! Chào mừng bạn.');
     }
 
-    // login
+    // Login 
     public function showLogin()
     {
-        return view("auth.login");
+        return view('auth.login');
     }
 
     public function login(Request $req)
     {
         $credentials = $req->validate([
-            'email' => ["required", "email"],
-            'password' => ["required"]
+            'email'    => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
         if (Auth::attempt($credentials)) {
             $req->session()->regenerate();
-            return redirect('/')->with('success', 'You have logged in successfully.');
+
+            if (Auth::user()->isAdmin()) {
+                return redirect()->route('admin.dashboard')
+                    ->with('success', 'Đăng nhập thành công! Chào mừng Admin.');
+            }
+
+            return redirect()->route('admin.dashboard')
+                ->with('success', 'Đăng nhập thành công!');
         }
 
         return back()->withErrors([
-            'email' => 'Invalid credentials.',
+            'email' => 'Email hoặc mật khẩu không đúng.',
         ])->onlyInput('email');
     }
 
-    // logout
+    // Logout 
     public function logout(Request $request)
     {
-        if (Auth::check()) {
-            Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-            return redirect('/login');
-        }
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login')
+            ->with('success', 'Đã đăng xuất thành công.');
     }
 }

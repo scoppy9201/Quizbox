@@ -11,8 +11,8 @@ class HomeController extends Controller
     public function index()
     {
         return view('home', [
-            'nowShowing' => Movie::latest()->take(8)->get(),
-            'topRatedMovies' => Movie::orderByDesc('rating')->take(8)->get(),
+            'latestQuizzes' => Movie::latest()->take(8)->get(),
+            'featuredQuizzes' => Movie::orderByDesc('rating')->take(8)->get(),
         ]);
     }
 }

@@ -1,4 +1,4 @@
-<x-admin-layout title="Add New Movie - Movie Box">
+<x-admin-layout title="Add New Movie - {{ config('app.name') }}">
     <nav class="text-sm text-muted-foreground mb-6" aria-label="breadcrumb">
         <ol class="list-none p-0 inline-flex">
             <li class="flex items-center">

@@ -1,47 +1,60 @@
 <x-layout>
-    <x-slot:title>
-        Log In - Movie Box
-    </x-slot>
+    <x-slot:title>Đăng nhập - {{ config('app.name') }}</x-slot>
 
-    <div class="max-w-md mx-auto mt-14 bg-card border border-border shadow-md rounded-2xl p-8 space-y-6">
+    <div class="qb-auth">
+        <div class="qb-auth__blob qb-auth__blob--1"></div>
+        <div class="qb-auth__blob qb-auth__blob--2"></div>
 
-        <h1 class="text-3xl font-bold text-center text-primary tracking-tight">Welcome Back</h1>
-        <p class="text-center text-muted-foreground text-sm">Log in to your Movie Box account</p>
+        <div class="qb-auth__card">
 
-        @if ($errors->any())
-            <div class="bg-destructive/10 border border-destructive text-destructive text-sm p-4 rounded-lg">
-                <ul class="list-disc list-inside space-y-1">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('login') }}" class="space-y-5">
-            @csrf
-
-            <div>
-                <label for="email" class="block text-sm font-medium text-muted-foreground mb-1">Email</label>
-                <input type="email" name="email" id="email" value="{{ old('email') }}" required
-                    class="w-full rounded-lg border border-border bg-background text-foreground py-2 px-3 focus:ring-2 focus:ring-primary focus:border-primary transition">
+            {{-- Logo --}}
+            <div class="qb-auth__logo">
+                <svg viewBox="0 0 40 40" fill="none" width="32" height="32">
+                    <path d="M20 4 L26 16 L20 12 L14 16 Z" fill="white" opacity="0.9"/>
+                    <path d="M20 36 L14 24 L20 28 L26 24 Z" fill="white" opacity="0.9"/>
+                    <path d="M4 20 L16 14 L12 20 L16 26 Z" fill="white" opacity="0.7"/>
+                    <path d="M36 20 L24 26 L28 20 L24 14 Z" fill="white" opacity="0.7"/>
+                </svg>
             </div>
 
-            <div>
-                <label for="password" class="block text-sm font-medium text-muted-foreground mb-1">Password</label>
-                <input type="password" name="password" id="password" required
-                    class="w-full rounded-lg border border-border bg-background text-foreground py-2 px-3 focus:ring-2 focus:ring-primary focus:border-primary transition">
-            </div>
+            <h1 class="qb-auth__title">Chào mừng trở lại</h1>
+            <p class="qb-auth__desc">Đăng nhập vào tài khoản {{ config('app.name') }} của bạn</p>
 
-            <button type="submit"
-                class="w-full btn btn-primary py-3 text-base font-semibold rounded-lg transition-colors">
-                Log In
-            </button>
+            @if ($errors->any())
+                <div class="qb-auth__error">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-            <p class="text-center text-sm text-muted-foreground mt-4">
-                Don't have an account?
-                <a href="{{ route('register') }}" class="text-primary hover:underline font-medium">Register</a>
-            </p>
-        </form>
+            <form method="POST" action="{{ route('login') }}" class="qb-auth__form">
+                @csrf
+
+                <div class="qb-auth__field">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email"
+                           value="{{ old('email') }}" required
+                           placeholder="you@example.com" />
+                </div>
+
+                <div class="qb-auth__field">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" name="password" id="password"
+                           required placeholder="••••••••" />
+                </div>
+
+                <button type="submit" class="qb-btn qb-btn--primary w-full justify-center mt-2">
+                    Đăng nhập
+                </button>
+
+                <p class="qb-auth__footer">
+                    Chưa có tài khoản?
+                    <a href="{{ route('register') }}">Đăng ký ngay</a>
+                </p>
+            </form>
+        </div>
     </div>
 </x-layout>

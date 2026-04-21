@@ -1,4 +1,4 @@
-<x-admin-layout title="Add New Show - Movie Box">
+<x-admin-layout title="Add New Show - {{ config('app.name') }}">
     <nav class="text-sm text-muted-foreground mb-6" aria-label="breadcrumb">
         <ol class="list-none p-0 inline-flex">
             <li><a href="{{ route('admin.dashboard') }}" class="hover:text-primary">Dashboard</a><span

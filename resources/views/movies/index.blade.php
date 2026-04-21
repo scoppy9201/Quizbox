@@ -1,7 +1,7 @@
 <x-layout>
 
     <x-slot:title>
-        Browse Our Movie Collection - Movie Box
+        Browse Our Movie Collection - {{ config('app.name') }}
     </x-slot>
 
     <x-slot:section_title>
