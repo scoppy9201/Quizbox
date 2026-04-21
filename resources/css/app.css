@@ -1,0 +1,380 @@
+@import "tailwindcss";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: "Adwaita Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+}
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+
+        /* Base Colors */
+        --background: #f8fafc;
+        --foreground: #1e293b;
+
+        /* Card and UI Containers */
+        --card: #ffffff;
+        --card-foreground: #1e293b;
+        --popover: #ffffff;
+        --popover-foreground: #1e293b;
+
+        /* Primary Theme */
+        --primary: #1e293b;
+        --primary-foreground: #ffffff;
+
+        /* Secondary */
+        --secondary: #64748b;
+        --secondary-foreground: #ffffff;
+
+        /* Accent */
+        --accent: #fbbf24;
+        --accent-foreground: #1e293b;
+
+        /* Muted and Borders */
+        --muted: #e2e8f0;
+        --muted-foreground: #475569;
+        --border: #cbd5e1;
+        --input: #cbd5e1;
+
+        /* Other UI elements */
+        --ring: #1e293b;
+        --destructive: #ef4444;
+        --destructive-foreground: #ffffff;
+
+        /* Sidebar */
+        --sidebar: #f1f5f9;
+        --sidebar-foreground: #1e293b;
+        --sidebar-primary: #1e293b;
+        --sidebar-primary-foreground: #ffffff;
+        --sidebar-accent: #fbbf24;
+        --sidebar-accent-foreground: #1e293b;
+        --sidebar-border: #cbd5e1;
+        --sidebar-ring: #1e293b;
+    }
+
+    .dark {
+        --background: #0f172a;
+        --foreground: #f8fafc;
+
+        --card: #1e293b;
+        --card-foreground: #f8fafc;
+
+        --popover: #1e293b;
+        --popover-foreground: #f8fafc;
+
+        --primary: #fbbf24;
+        --primary-foreground: #1e293b;
+
+        --secondary: #334155;
+        --secondary-foreground: #f8fafc;
+
+        --accent: #fbbf24;
+        --accent-foreground: #1e293b;
+
+        --muted: #1e293b;
+        --muted-foreground: #94a3b8;
+
+        --border: #334155;
+        --input: #334155;
+        --ring: #fbbf24;
+
+        --destructive: #ef4444;
+        --destructive-foreground: #f8fafc;
+
+        --sidebar: #1e293b;
+        --sidebar-foreground: #f8fafc;
+        --sidebar-primary: #fbbf24;
+        --sidebar-primary-foreground: #1e293b;
+        --sidebar-accent: #fbbf24;
+        --sidebar-accent-foreground: #1e293b;
+        --sidebar-border: #334155;
+        --sidebar-ring: #fbbf24;
+    }
+}
+
+@layer utilities {
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border-radius: var(--radius);
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s;
+        white-space: nowrap;
+        outline: none;
+        border-width: 1px;
+        border-style: solid;
+        cursor: pointer;
+        padding: 0.45rem 0.75rem;
+    }
+    .btn:disabled,
+    .btn[disabled] {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+    .btn svg {
+        pointer-events: none;
+        flex-shrink: 0;
+    }
+    .btn svg:not([class*="size-"]) {
+        width: 1rem;
+        height: 1rem;
+    }
+    .btn:focus-visible {
+        border-color: var(--ring);
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+    .btn[aria-invalid="true"] {
+        box-shadow: 0 0 0 3px
+            color-mix(in oklab, var(--destructive) 20%, transparent);
+        border-color: var(--destructive);
+    }
+    .dark .btn[aria-invalid="true"] {
+        box-shadow: 0 0 0 3px
+            color-mix(in oklab, var(--destructive) 40%, transparent);
+    }
+
+    /* Primary */
+    .btn-primary {
+        background-color: var(--primary);
+        color: var(--primary-foreground);
+        border-color: var(--primary);
+    }
+    .btn-primary:hover {
+        background-color: color-mix(in oklab, var(--primary) 90%, black);
+        color: var(--primary-foreground);
+    }
+    .dark .btn-primary:hover {
+        background-color: color-mix(in oklab, var(--primary) 80%, white);
+    }
+
+    /* Secondary */
+    .btn-secondary {
+        background-color: var(--secondary);
+        color: var(--secondary-foreground);
+        border-color: var(--secondary);
+    }
+    .btn-secondary:hover {
+        background-color: color-mix(in oklab, var(--secondary) 90%, black);
+        color: var(--secondary-foreground);
+    }
+    .dark .btn-secondary:hover {
+        background-color: color-mix(in oklab, var(--secondary) 80%, white);
+    }
+
+    /* Destructive */
+    .btn-destructive {
+        background-color: var(--destructive);
+        color: var(--primary-foreground);
+        border-color: var(--destructive);
+    }
+    .btn-destructive:hover {
+        background-color: color-mix(in oklab, var(--destructive) 90%, black);
+        color: var(--primary-foreground);
+    }
+    .dark .btn-destructive:hover {
+        background-color: color-mix(in oklab, var(--destructive) 80%, white);
+    }
+
+    /* Outline */
+    .btn-outline {
+        background-color: transparent;
+        color: var(--foreground);
+        border-color: var(--border);
+    }
+    .btn-outline:hover {
+        background-color: var(--accent);
+        color: var(--accent-foreground);
+        border-color: var(--accent);
+    }
+    .dark .btn-outline:hover {
+        background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+    }
+
+    /* Subtle */
+    .btn-subtle {
+        background-color: var(--muted);
+        color: var(--foreground);
+        border-color: var(--muted);
+    }
+    .btn-subtle:hover {
+        background-color: color-mix(in oklab, var(--muted) 90%, black);
+        color: var(--foreground);
+    }
+    .dark .btn-subtle:hover {
+        background-color: color-mix(in oklab, var(--muted) 80%, white);
+    }
+
+    .btn-link {
+        background-color: transparent;
+        color: var(--muted-foreground);
+        border-color: transparent;
+        padding-left: 0;
+        padding-right: 0;
+        height: auto;
+    }
+    .btn-link:hover {
+        text-decoration: underline;
+        background-color: transparent;
+        color: var(--muted-foreground);
+    }
+
+    .bg-background {
+        background-color: var(--background);
+    }
+    .bg-sidebar {
+        background-color: var(--sidebar);
+    }
+    .bg-card {
+        background-color: var(--card);
+    }
+
+    .text-foreground {
+        color: var(--foreground);
+    }
+    .text-sidebar-foreground {
+        color: var(--sidebar-foreground);
+    }
+    .text-card-foreground {
+        color: var(--card-foreground);
+    }
+
+    .bg-sidebar-accent {
+        background-color: var(--sidebar-accent);
+    }
+    .text-sidebar-accent-foreground {
+        color: var(--sidebar-accent-foreground);
+    }
+
+    /* Backgrounds */
+    .bg-background {
+        background-color: var(--background);
+    }
+    .bg-foreground {
+        background-color: var(--foreground);
+    }
+    .bg-card {
+        background-color: var(--card);
+    }
+    .bg-muted {
+        background-color: var(--muted);
+    }
+    .bg-popover {
+        background-color: var(--popover);
+    }
+    .bg-primary {
+        background-color: var(--primary);
+    }
+    .bg-secondary {
+        background-color: var(--secondary);
+    }
+    .bg-accent {
+        background-color: var(--accent);
+    }
+    .bg-destructive {
+        background-color: var(--destructive);
+    }
+
+    /* Text Colors */
+    .text-foreground {
+        color: var(--foreground);
+    }
+    .text-card-foreground {
+        color: var(--card-foreground);
+    }
+    .text-muted-foreground {
+        color: var(--muted-foreground);
+    }
+    .text-popover-foreground {
+        color: var(--popover-foreground);
+    }
+    .text-primary-foreground {
+        color: var(--primary-foreground);
+    }
+    .text-secondary-foreground {
+        color: var(--secondary-foreground);
+    }
+    .text-accent-foreground {
+        color: var(--accent-foreground);
+    }
+
+    /* Borders */
+    .border-border {
+        border-color: var(--border);
+    }
+    .border-input {
+        border-color: var(--input);
+    }
+
+    /* Ring */
+    .ring-ring {
+        --tw-ring-color: var(--ring);
+    }
+
+    .rounded-b-radius {
+        border-bottom-left-radius: var(--radius);
+        border-bottom-right-radius: var(--radius);
+    }
+
+    .rounded-radius {
+        border-radius: var(--radius);
+    }
+
+    /* Misc Tokens */
+    .bg-sidebar {
+        background-color: var(--sidebar);
+    }
+    .text-sidebar-foreground {
+        color: var(--sidebar-foreground);
+    }
+    .bg-sidebar-accent {
+        background-color: var(--sidebar-accent);
+    }
+    .text-sidebar-accent-foreground {
+        color: var(--sidebar-accent-foreground);
+    }
+    .border-sidebar-border {
+        border-color: var(--sidebar-border);
+    }
+    .ring-sidebar-ring {
+        --tw-ring-color: var(--sidebar-ring);
+    }
+
+    /* Chart Colors (optional for graphs) */
+    .bg-chart-1 {
+        background-color: var(--chart-1);
+    }
+    .bg-chart-2 {
+        background-color: var(--chart-2);
+    }
+    .bg-chart-3 {
+        background-color: var(--chart-3);
+    }
+    .bg-chart-4 {
+        background-color: var(--chart-4);
+    }
+    .bg-chart-5 {
+        background-color: var(--chart-5);
+    }
+
+    /* :root {
+        --primary: #1e293b;
+        --primary-foreground: #fff;
+        --secondary: #64748b;
+        --secondary-foreground: #fff;
+        --accent: #fbbf24;
+        --background: #f8fafc;
+        --card: #fff;
+        --muted: #e2e8f0;
+        --border: #cbd5e1;
+    } */
+}
