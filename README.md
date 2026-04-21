@@ -138,7 +138,7 @@ The system is built following modern Laravel architecture principles, ensuring m
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/your-username/quizbox.git
+git clone https://github.com/scoppy9201/Quizbox
 cd quizbox
 ```
 
@@ -252,7 +252,7 @@ This project is licensed under the MIT License.
 ---
 
 <p align="center">
-  Developed by <strong>Your Name</strong><br>
+  Developed by <strong>Manh Hung</strong><br>
   Fullstack Developer
 </p>
 
